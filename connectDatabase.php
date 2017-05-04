@@ -28,26 +28,31 @@
   		PRIMARY KEY (`id`)
 		);";
 
-		if ($db->query($sql2) === TRUE) {
-			echo "Table MyGuests created successfully";
-		} else {
-			echo "Error creating table: " . $db->error;
-		} 
-			$firstName = $_POST["fname"];
-			$lastName = $_POST["lname"];
-			$email = $_POST["email"];
-			$password = $_POST["password"];
-			$birthday = $_POST["birthday"];
-			$gender = $_POST["gender"];
-			$number = $_POST["number"];
-		$sql = "INSERT INTO 'accounts' (fname, lname, email, password, birthday, gender, number) VALUES ('$firstName', '$lastName', '$email' , '$password', '$birthday', '$gender', '$number');";
 		if ($db->query($sql) === TRUE) {
-			echo "Table MyGuests created successfully";
+			echo "Table accounts created successfully";
+		} 
+
+		//else {
+			//echo "Error creating table: " . $db->error;
+		//} 
+			$firstName = isset($_POST["fname"]) ? $_POST['fname'] : '';
+			$lastName = isset($_POST["lname"]) ? $_POST['lname'] : '';
+			$email = isset($_POST["email"]) ? $_POST['email'] : '';
+			$password = isset($_POST["password"]) ? $_POST['password'] : '';
+			$birthday = isset($_POST["birthday"]) ? $_POST['birthday'] : '';
+			//$gender == isset($_POST["gender"]) ? $_POST['gender'] : '';
+			$number = isset($_POST["number"]) ? $_POST['number'] : '';
+
+		$sql = "INSERT INTO 'accounts' (fname, lname, email, password, birthday, number) VALUES ('$firstName', '$lastName', '$email' , '$password', '$birthday', '$number');";
+		if ($db->query($sql) === TRUE) {
+			echo "Table accounts created successfully";
 			$message = "Database accessed";
 			echo "<script type='text/javascript'>alert('$message');</script>";	
-		} else {
-			echo "Error creating table: " + $sql->error;
-		}
+		} 
+
+		//else {
+			//echo "Error creating table: " + $sql->error;
+		//}
 
         
     } catch (PDOException $e) {
