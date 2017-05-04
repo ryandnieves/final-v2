@@ -2,13 +2,14 @@
 	
 	date_default_timezone_set('America/New_York');
 	
-	//$hostname = 'sql2.njit.edu'; // Change this to your server settings. E.g., sql2.njit.edu
 	$hostname = 'localhost';
-	$database = 'rdn5';		// This should be your UCID (same as username)
-	//$username = 'rdn5';		// This should be your UCID (same as database name)
+	$database = 'rdn5';
 	$username = 'root';
+	$password = '';		
+	//$hostname = 'sql2.njit.edu'; // Change this to your server settings. E.g., sql2.njit.edu
+	//$database = 'rdn5';
+	//$username = 'rdn5';		// This should be your UCID (same as database name)
 	//$password = 'DNb8Q7oFy';	// This is your NJIT mySQL password. It is likely different from your UCID password.
-	$password = '';
 	
     try {
         
@@ -28,31 +29,16 @@
   		PRIMARY KEY (`id`)
 		);";
 
-		if ($db->query($sql) === TRUE) {
-			echo "Table accounts created successfully";
-		} 
-
-		//else {
-			//echo "Error creating table: " . $db->error;
-		//} 
-			$firstName = isset($_POST["fname"]) ? $_POST['fname'] : '';
-			$lastName = isset($_POST["lname"]) ? $_POST['lname'] : '';
-			$email = isset($_POST["email"]) ? $_POST['email'] : '';
-			$password = isset($_POST["password"]) ? $_POST['password'] : '';
-			$birthday = isset($_POST["birthday"]) ? $_POST['birthday'] : '';
-			//$gender == isset($_POST["gender"]) ? $_POST['gender'] : '';
-			$number = isset($_POST["number"]) ? $_POST['number'] : '';
+		$firstName = isset($_POST["fname"]);
+		$lastName = isset($_POST["lname"]) ? $_POST['lname'] : '';
+		$email = isset($_POST["email"]) ? $_POST['email'] : '';
+		$password = isset($_POST["password"]) ? $_POST['password'] : '';
+		$birthday = isset($_POST["birthday"]) ? $_POST['birthday'] : '';
+		//$gender == isset($_POST["gender"]) ? $_POST['gender'] : '';
+		$number = isset($_POST["number"]) ? $_POST['number'] : '';
 
 		$sql = "INSERT INTO 'accounts' (fname, lname, email, password, birthday, number) VALUES ('$firstName', '$lastName', '$email' , '$password', '$birthday', '$number');";
-		if ($db->query($sql) === TRUE) {
-			echo "Table accounts created successfully";
-			$message = "Database accessed";
-			echo "<script type='text/javascript'>alert('$message');</script>";	
-		} 
 
-		//else {
-			//echo "Error creating table: " + $sql->error;
-		//}
 
         
     } catch (PDOException $e) {

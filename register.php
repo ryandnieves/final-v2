@@ -1,4 +1,7 @@
 
+<?php
+include_once 'connectDatabase.php';
+?>
 
 <div class="container-fluid">
     <section class="container">
