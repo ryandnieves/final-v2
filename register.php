@@ -57,30 +57,11 @@ include_once 'connectDatabase.php';
                     </div>
                 </div>     
                 
-        
-            <div class="col-md-6">
-                <h3 class="dark-grey">Terms and Conditions</h3>
-                <p>
-                    By clicking on "Register" you agree to The Company's' Terms and Conditions
-                </p>
-                <p>
-                    While rare, prices are subject to change based on exchange rate fluctuations - 
-                    should such a fluctuation happen, we may request an additional payment. You have the option to request a full refund or to pay the new price. (Paragraph 13.5.8)
-                </p>
-                <p>
-                    Should there be an error in the description or pricing of a product, we will provide you with a full refund (Paragraph 13.5.6)
-                </p>
-                <p>
-                    Acceptance of an order by us is dependent on our suppliers ability to provide the product. (Paragraph 13.5.6)
-                </p>
-                
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
                         <button type="submit" class="btn btn-primary btn-block"><a href="index.php">Register</a></button>
                     </div>
                 </div>
-
             </div>
-        </div>
     </section>
 </div>
