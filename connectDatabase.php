@@ -16,8 +16,6 @@
 
         $sql =
 
-		DROP TABLE IF EXISTS `accounts`;
-
 		"CREATE TABLE `accounts` (
   		`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   		`email` varchar(60) DEFAULT NULL,
@@ -50,14 +48,6 @@
 		} else {
 			echo "Error creating table: " + $sql->error;
 		}
-
-
-
-		INSERT INTO `accounts` (`id`, `email`, `fname`, `lname`, `phone`, `birthday`, `gender`, `password`)
-		VALUES
-			(1,'mjlee@njit.edu','Mike','Lee','974-555-5555','2000-05-05','male','1234'),
-			(2,'janedoe@njit.edu','John','Doe','555-555-5555','1950-07-07','female','1234');
-		UNLOCK TABLES;
 
         
     } catch (PDOException $e) {
