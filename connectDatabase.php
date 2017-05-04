@@ -1,0 +1,92 @@
+<?php
+	
+	date_default_timezone_set('America/New_York');
+	
+	//$hostname = 'sql2.njit.edu'; // Change this to your server settings. E.g., sql2.njit.edu
+	$hostname = 'localhost';
+	$database = 'rdn5';		// This should be your UCID (same as username)
+	//$username = 'rdn5';		// This should be your UCID (same as database name)
+	$username = 'root';
+	//$password = 'DNb8Q7oFy';	// This is your NJIT mySQL password. It is likely different from your UCID password.
+	$password = '';
+	
+    try {
+        
+        $db = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
+
+        $sql =
+
+		DROP TABLE IF EXISTS `accounts`;
+
+		"CREATE TABLE `accounts` (
+  		`id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  		`email` varchar(60) DEFAULT NULL,
+  		`fname` varchar(30) DEFAULT NULL,
+  		`lname` varchar(30) DEFAULT NULL,
+  		`phone` varchar(20) DEFAULT NULL,
+  		`birthday` date DEFAULT NULL,
+  		`gender` varchar(20) DEFAULT NULL,
+  		`password` varchar(30) DEFAULT NULL,
+  		PRIMARY KEY (`id`)
+		);";
+
+		if ($db->query($sql2) === TRUE) {
+			echo "Table MyGuests created successfully";
+		} else {
+			echo "Error creating table: " . $db->error;
+		} 
+			$firstName = $_POST["fname"];
+			$lastName = $_POST["lname"];
+			$email = $_POST["email"];
+			$password = $_POST["password"];
+			$birthday = $_POST["birthday"];
+			$gender = $_POST["gender"];
+			$number = $_POST["number"];
+		$sql = "INSERT INTO 'accounts' (fname, lname, email, password, birthday, gender, number) VALUES ('$firstName', '$lastName', '$email' , '$password', '$birthday', '$gender', '$number');";
+		if ($db->query($sql) === TRUE) {
+			echo "Table MyGuests created successfully";
+			$message = "Database accessed";
+			echo "<script type='text/javascript'>alert('$message');</script>";	
+		} else {
+			echo "Error creating table: " + $sql->error;
+		}
+
+
+
+		INSERT INTO `accounts` (`id`, `email`, `fname`, `lname`, `phone`, `birthday`, `gender`, `password`)
+		VALUES
+			(1,'mjlee@njit.edu','Mike','Lee','974-555-5555','2000-05-05','male','1234'),
+			(2,'janedoe@njit.edu','John','Doe','555-555-5555','1950-07-07','female','1234');
+		UNLOCK TABLES;
+
+        
+    } catch (PDOException $e) {
+        $error_message = $e->getMessage();
+        http_error(500, "Internal Server Error", "We couldn't connect to a Heroku MySQL database.");
+        header('HTTP/1.1 500 Internal Server Error');
+		exit("ERROR: There was an error connecting to the mySQL database. Error message: ".$error_message);
+    }
+    
+    
+    // Runs SQL query and returns results (if valid)
+    function runQuery($query) {
+
+		global $db;
+
+	    try {
+    
+			$q = $db->prepare($query);
+			$q->execute();
+			$results = $q->fetchAll();
+			$q->closeCursor();
+
+			return $results;
+			
+		} catch (PDOException $e) {
+
+			http_error(500, "Internal Server Error", "There was a SQL error:\n\n" . $e->getMessage());
+			
+		}	
+	    
+	}
+?>
